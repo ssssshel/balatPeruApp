@@ -1,0 +1,45 @@
+.container {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.balat {
+  font-size: 20px;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+}
+
+.spacer {
+  width: 20px;
+}
+
+.recover {
+  text-decoration: none;
+  font-size: 12px;
+  text-align: center;
+  color: black;
+}
+
+.bottomInfo {
+  flex-direction: column;
+  align-items: center;
+}
+.bottomInfo p {
+  font-size: 10px;
+  text-align: center;
+  color: #706C6C;
+}
+.bottomInfo .line {
+  width: 100%;
+  height: 1px;
+  background-color: #706C6C;
+}/*# sourceMappingURL=Login.css.map */

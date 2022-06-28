@@ -1,0 +1,11 @@
+.toolbar {
+  padding: 5px 15px;
+}
+
+.toolbar .logo {
+  font-size: 20px;
+}
+
+.toolbar .driverData {
+  font-size: 12px;
+}
