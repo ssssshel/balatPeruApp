@@ -1,0 +1,48 @@
+.mapContainer {
+  width: 100%;
+  height: 30vh;
+  background-color: green;
+}
+
+.passengersNumber {
+  font-size: 12px;
+  color: #747474;
+}
+
+.passengersListContainer {
+  width: 100%;
+}
+
+.leftItemSection {
+  width: 75%;
+}
+
+.rightItemSection {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.passengerAddress {
+  font-size: 12px;
+}
+
+.passengerName,
+.passengerNumber {
+  font-size: 10px;
+}
+
+.passengerName {
+  color: #747474;
+}
+
+.passengerOrder,
+.passengerState {
+  font-size: 12px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+}

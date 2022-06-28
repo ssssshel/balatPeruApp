@@ -4,7 +4,7 @@
   justify-content: space-around;
 } */
 
-.item {
+.itemTripsMenu {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -24,15 +24,16 @@
   font-size: 12px;
 }
 
-.left {
+.leftItemSection {
   width: 75%;
 }
 
-.right {
+.rightItemSection {
   width: 25%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  justify-content: space-between;
 }
 
 .passengers {

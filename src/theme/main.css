@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "SegoeUI";
+  src: url("../../public/assets/fonts/Segoe UI.ttf");
+}
+
+* {
+  font-family: "SegoeUI";
+}

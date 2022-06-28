@@ -5,7 +5,7 @@ const RecoverPassword: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar color={"tertiary"}>
           <IonButtons slot="start">
             <IonBackButton defaultHref="/login" />
           </IonButtons>

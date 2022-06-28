@@ -28,6 +28,9 @@ import DrawerMenu from './components/DrawerMenu';
 /* Theme variables */
 // import './theme/variables.css';
 
+// MainCSS
+import './theme/main.css';
+
 setupIonicReact();
 
 // manejar estado de usuario con interfaces 
