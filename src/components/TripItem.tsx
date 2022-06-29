@@ -1,13 +1,21 @@
 import { IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonText } from "@ionic/react"
 import { person } from "ionicons/icons"
+import { useRef } from "react"
 
 interface TripItemProps {
   arePreviousTrips: boolean
 }
 
 const TripItem: React.FC<TripItemProps> = ({ arePreviousTrips }) => {
+
+  const slideRef = useRef<HTMLIonItemSlidingElement>(null)
+
+  const handleOpenSlide = () => {
+    slideRef.current!.open("end")
+  }
+
   return (
-    <IonItemSliding>
+    <IonItemSliding ref={slideRef} id="tripOptions" onClick={() => { handleOpenSlide() }}>
       <IonItemOptions side="end">
         <IonItemOption routerLink={arePreviousTrips ? '/previous_trip' : '/trip'} color={"success"}>Ver</IonItemOption>
       </IonItemOptions>

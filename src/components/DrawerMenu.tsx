@@ -1,7 +1,13 @@
-import { IonContent, IonHeader, IonItem, IonList, IonMenu, IonPage, IonRouterOutlet, IonToolbar } from "@ionic/react"
+import { IonContent, IonHeader, IonItem, IonList, IonMenu, IonRouterOutlet, IonToolbar } from "@ionic/react"
+import { menuController } from '@ionic/core/components'
 import './DrawerMenu.css'
 
-const DrawerMenu = () => {
+const DrawerMenu: React.FC = () => {
+
+  const handleCloseMenu = async () => {
+    await menuController.toggle()
+  }
+
   return (
     <>
       <IonMenu side="start" contentId="main" menuId="leftdrawer">
@@ -18,13 +24,13 @@ const DrawerMenu = () => {
         </IonHeader>
         <IonContent>
           <IonList>
-            <IonItem routerLink="/trips/pending">
+            <IonItem onClick={() => handleCloseMenu()} routerLink="/trips/pending">
               Viajes Pendientes
             </IonItem>
-            <IonItem routerLink="/trips/previous">
+            <IonItem onClick={() => handleCloseMenu()} routerLink="/trips/previous">
               Viajes Previos
             </IonItem>
-            <IonItem slot="start">
+            <IonItem onClick={() => handleCloseMenu()} slot="end">
               Cerrar Sesión
             </IonItem>
           </IonList>

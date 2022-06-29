@@ -18,6 +18,10 @@ const PendingTrips: React.FC = () => {
         <IonList>
           <TripItem arePreviousTrips={false} />
           {/* maqueta */}
+          <TripItem arePreviousTrips={false} />
+          <TripItem arePreviousTrips={false} />
+          <TripItem arePreviousTrips={false} />
+          <TripItem arePreviousTrips={false} />
 
         </IonList>
 
