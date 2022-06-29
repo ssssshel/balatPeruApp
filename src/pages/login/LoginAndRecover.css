@@ -7,7 +7,7 @@
 }
 
 .balat {
-  font-size: 20px;
+  font-size: 30px;
   text-align: center;
 }
 
@@ -36,10 +36,10 @@
 .bottomInfo p {
   font-size: 10px;
   text-align: center;
-  color: #706C6C;
+  color: #707070;
 }
 .bottomInfo .line {
   width: 100%;
   height: 1px;
-  background-color: #706C6C;
-}/*# sourceMappingURL=Login.css.map */
+  background-color: #707070;
+} /*# sourceMappingURL=Login.css.map */

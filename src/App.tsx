@@ -2,6 +2,12 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Login from './pages/login/Login';
+import RecoverPassword from './pages/recoverPassword/RecoverPassword';
+import PendingTrips from './pages/tripsMenu/PendingTrips';
+import PreviousTrips from './pages/tripsMenu/PreviousTrips';
+import IndividualTripMenu from './pages/individualTripMenu/IndividualTripMenu';
+import EventsRegister from './pages/eventsRegister/EventsRegister';
+import DrawerMenu from './components/DrawerMenu';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -10,12 +16,6 @@ import '@ionic/react/css/core.css';
 import '@ionic/react/css/normalize.css';
 import '@ionic/react/css/structure.css';
 import '@ionic/react/css/typography.css';
-import RecoverPassword from './pages/recoverPassword/RecoverPassword';
-import PendingTrips from './pages/tripsMenu/PendingTrips';
-import PreviousTrips from './pages/tripsMenu/PreviousTrips';
-import IndividualTripMenu from './pages/individualTripMenu/IndividualTripMenu';
-import EventsRegister from './pages/eventsRegister/EventsRegister';
-import DrawerMenu from './components/DrawerMenu';
 
 /* Optional CSS utils that can be commented out */
 // import '@ionic/react/css/padding.css';
@@ -26,10 +26,11 @@ import DrawerMenu from './components/DrawerMenu';
 // import '@ionic/react/css/display.css';
 
 /* Theme variables */
-// import './theme/variables.css';
+import './theme/variables.css';
 
 // MainCSS
 import './theme/main.css';
+import IndividualPreviousTripMenu from './pages/individualTripMenu/IndividualPreviousTripMenu';
 
 setupIonicReact();
 
@@ -69,11 +70,13 @@ const App: React.FC = () => {
           </Route>
 
 
-
           {/* individualTripMenu */}
           <Route path="/trip">
             {/* <Route path="/trip/:userId/:tripId"> */}
             <IndividualTripMenu />
+          </Route>
+          <Route path="/previous_trip">
+            <IndividualPreviousTripMenu />
           </Route>
 
           {/* eventsRegister */}

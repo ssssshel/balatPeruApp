@@ -6,7 +6,7 @@ const DrawerMenu = () => {
     <>
       <IonMenu side="start" contentId="main" menuId="leftdrawer">
         <IonHeader>
-          <IonToolbar color={"tertiary"}>
+          <IonToolbar color={"primary"}>
             <div className="toolbar">
               <p className="logo">BalatPerú</p>
               <div className="driverData">

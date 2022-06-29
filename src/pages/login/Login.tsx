@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonIcon, IonInput, IonItem, IonList, IonPage } from "@ionic/react"
+import { IonButton, IonContent, IonIcon, IonInput, IonItem, IonList, IonPage, IonText } from "@ionic/react"
 import { person, key } from 'ionicons/icons'
 import { Link } from "react-router-dom"
 
@@ -9,7 +9,10 @@ const Login: React.FC = () => {
     <IonPage>
       <IonContent fullscreen >
         <div className="container">
-          <p className="balat">BalatPerú</p>
+          <IonText color={"dark"}>
+            <p className="balat">BalatPerú</p>
+
+          </IonText>
           <form className="form" >
 
             <IonList>

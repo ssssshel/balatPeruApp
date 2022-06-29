@@ -1,12 +1,12 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonList, IonMenu, IonMenuButton, IonPage, IonText, IonToolbar } from "@ionic/react"
-import { person } from 'ionicons/icons'
-
+import { IonButtons, IonContent, IonHeader, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonMenuButton, IonPage, IonToolbar } from "@ionic/react"
+import TripItem from "../../components/TripItem"
 
 const PreviousTrips: React.FC = () => {
+
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color={"tertiary"} >
+        <IonToolbar color={"primary"} >
           <p>Viajes Previos</p>
           <IonButtons slot="start">
             <IonMenuButton type="button" autoHide={false} menu="leftdrawer" />
@@ -15,24 +15,9 @@ const PreviousTrips: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonList>
-          <IonItemSliding>
-            <IonItemOptions side="end">
-              <IonItemOption routerLink="/trip" color={"success"}>Ver</IonItemOption>
-            </IonItemOptions>
-            <IonItem >
+          <TripItem arePreviousTrips={true} />
+          {/* maqueta */}
 
-              <div className="leftItemSection">
-                <p className="date">23/06/22 | 07:30 AM - 8:30 AM</p>
-                <p className="car">Suzuki APV 2020 | DF7-540</p>
-                <p className="address">Calle Armendáriz 3465 - Comas</p>
-              </div>
-              <div className="rightItemSection">
-                <div className="passengers"><IonIcon className="icon" icon={person} /> <p>8</p></div>
-                <IonText color={"black"}><p className="state">Estado</p></IonText>
-                <IonText color={"primary"}><p className="type">Tipo de viaje</p></IonText>
-              </div>
-            </IonItem>
-          </IonItemSliding>
         </IonList>
 
         <IonInfiniteScroll>
