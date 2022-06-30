@@ -71,11 +71,11 @@ const App: React.FC = () => {
 
 
           {/* individualTripMenu */}
-          <Route path="/trip">
+          <Route path="/trip/:tripId">
             {/* <Route path="/trip/:userId/:tripId"> */}
             <IndividualTripMenu />
           </Route>
-          <Route path="/previous_trip">
+          <Route path="/previous_trip/:tripId">
             <IndividualPreviousTripMenu />
           </Route>
 

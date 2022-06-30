@@ -16,12 +16,12 @@ const PendingTrips: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonList>
-          <TripItem arePreviousTrips={false} />
+          <TripItem arePreviousTrips={false} tripId="4fasf4" />
           {/* maqueta */}
-          <TripItem arePreviousTrips={false} />
-          <TripItem arePreviousTrips={false} />
-          <TripItem arePreviousTrips={false} />
-          <TripItem arePreviousTrips={false} />
+          <TripItem arePreviousTrips={false} tripId="4fasgb" />
+          <TripItem arePreviousTrips={false} tripId="4fasa4" />
+          <TripItem arePreviousTrips={false} tripId="4fasff" />
+          <TripItem arePreviousTrips={false} tripId="4fasad" />
 
         </IonList>
 

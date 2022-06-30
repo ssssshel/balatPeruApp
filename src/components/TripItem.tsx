@@ -4,9 +4,12 @@ import { useRef } from "react"
 
 interface TripItemProps {
   arePreviousTrips: boolean
+
+  // maqueta
+  tripId: string
 }
 
-const TripItem: React.FC<TripItemProps> = ({ arePreviousTrips }) => {
+const TripItem: React.FC<TripItemProps> = ({ arePreviousTrips, tripId }) => {
 
   const slideRef = useRef<HTMLIonItemSlidingElement>(null)
 
@@ -17,7 +20,7 @@ const TripItem: React.FC<TripItemProps> = ({ arePreviousTrips }) => {
   return (
     <IonItemSliding ref={slideRef} id="tripOptions" onClick={() => { handleOpenSlide() }}>
       <IonItemOptions side="end">
-        <IonItemOption routerLink={arePreviousTrips ? '/previous_trip' : '/trip'} color={"success"}>Ver</IonItemOption>
+        <IonItemOption routerLink={arePreviousTrips ? `/previous_trip/${tripId}` : `/trip/${tripId}`} color={"success"}>Ver</IonItemOption>
       </IonItemOptions>
       <IonItem >
 

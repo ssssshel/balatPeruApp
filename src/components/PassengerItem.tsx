@@ -1,4 +1,5 @@
 import { IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonText } from "@ionic/react";
+import { useRef } from "react";
 
 interface PassengerProps {
   address: string
@@ -9,12 +10,19 @@ interface PassengerProps {
 }
 
 const PassengerItem: React.FC<PassengerProps> = ({ address, name, cellphone, order, state }) => {
+
+  const slideRef = useRef<HTMLIonItemSlidingElement>(null)
+
+  const handleOpenSlide = () => {
+    slideRef.current!.open("end")
+  }
+
   return (
-    <IonItemSliding>
+    <IonItemSliding className="slider" ref={slideRef} onClick={() => handleOpenSlide()} >
       <IonItemOptions>
         <IonItemOption color={"success"}>Iniciar</IonItemOption>
         <IonItemOption color={"light"}>Llamar</IonItemOption>
-        <IonItemOption color={"tertiary"}>Estado</IonItemOption>
+        <IonItemOption color={"primary"}>Estado</IonItemOption>
       </IonItemOptions>
       <IonItem>
         <div className="leftItemSection">

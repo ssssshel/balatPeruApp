@@ -15,7 +15,7 @@ const PreviousTrips: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonList>
-          <TripItem arePreviousTrips={true} />
+          <TripItem arePreviousTrips={true} tripId="23asf4" />
           {/* maqueta */}
 
         </IonList>
