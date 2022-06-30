@@ -1,5 +1,5 @@
-import { IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonText } from "@ionic/react";
-import { useRef } from "react";
+import { IonAlert, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonText } from "@ionic/react";
+import { useRef, useState } from "react";
 
 interface PassengerProps {
   address: string
@@ -17,13 +17,17 @@ const PassengerItem: React.FC<PassengerProps> = ({ address, name, cellphone, ord
     slideRef.current!.open("end")
   }
 
+  // maqueta
+  const [showStateAlert, setShowStateAlert] = useState(false)
+
   return (
     <IonItemSliding className="slider" ref={slideRef} onClick={() => handleOpenSlide()} >
       <IonItemOptions>
         <IonItemOption color={"success"}>Iniciar</IonItemOption>
         <IonItemOption color={"light"}>Llamar</IonItemOption>
-        <IonItemOption color={"primary"}>Estado</IonItemOption>
+        <IonItemOption onClick={() => setShowStateAlert(true)} color={"primary"}>Estado</IonItemOption>
       </IonItemOptions>
+      <IonAlert isOpen={showStateAlert} onDidDismiss={() => setShowStateAlert(false)} header={"ALERT"} subHeader={"ddd"} message="Esta es una alerta" buttons={["ok"]} />
       <IonItem>
         <div className="leftItemSection">
           <p className="passengerAddress">{address}</p>

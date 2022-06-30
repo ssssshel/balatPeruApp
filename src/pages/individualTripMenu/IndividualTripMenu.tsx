@@ -1,4 +1,5 @@
 import { IonBackButton, IonButton, IonButtons, IonContent, IonFooter, IonHeader, IonItem, IonList, IonPage, IonText, IonToolbar } from "@ionic/react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import PassengerItem from "../../components/PassengerItem"
 import { useTripState } from "../../hooks/useTripState"
@@ -11,6 +12,32 @@ const IndividualTripMenu: React.FC = () => {
   const { tripId } = useParams<{ tripId: string }>()
 
   const { startTrip, finalizeTrip, trip, error } = useTripState()
+
+  const [stateOfTrip, setStateOfTrip] = useState("")
+
+  useEffect(() => {
+    switch (trip?.tripState) {
+      case "unstarted":
+        setStateOfTrip("Sin iniciar")
+        break
+      case "pickingup":
+        setStateOfTrip("Recogiendo pasajeros")
+        break
+      case "onway":
+        setStateOfTrip("En camino")
+        break
+      case "finalized":
+        setStateOfTrip("Finalizado")
+        break
+      case "suspended":
+        setStateOfTrip("Suspendido")
+        break
+      default:
+        setStateOfTrip("Sin iniciar")
+        break;
+    }
+  }, [trip?.tripState])
+
 
 
   console.log(trip)
@@ -37,7 +64,7 @@ const IndividualTripMenu: React.FC = () => {
               <p className="address">Dest: Calle Armendáriz 3465 - Comas</p>
             </div>
             <div className="rightItemSection">
-              <IonText color={"black"}><p className="state">Estado</p></IonText>
+              <IonText color={"black"}><p className="state">{trip?.tripId === tripId ? stateOfTrip : "Sin iniciar"}</p></IonText>
               <IonText color={"primary"}><p className="type">Tipo de viaje</p></IonText>
             </div>
           </IonItem>
