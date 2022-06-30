@@ -1,9 +1,7 @@
 import { IonBackButton, IonButton, IonButtons, IonContent, IonFooter, IonHeader, IonItem, IonList, IonPage, IonText, IonToolbar } from "@ionic/react"
-import { useHistory, useParams } from "react-router"
+import { useParams } from "react-router"
 import PassengerItem from "../../components/PassengerItem"
-import { useTripState } from "../../services/useTripState"
-
-import { Storage } from "@capacitor/storage"
+import { useTripState } from "../../hooks/useTripState"
 
 import './IndividualTripMenu.css'
 
