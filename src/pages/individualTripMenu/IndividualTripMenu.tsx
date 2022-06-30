@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import PassengerItem from "../../components/PassengerItem"
 import { useTripState } from "../../hooks/useTripState"
+import { useTimer } from "../../hooks/useTimer"
 
 import './IndividualTripMenu.css'
 
@@ -10,6 +11,8 @@ const IndividualTripMenu: React.FC = () => {
 
   // maqueta
   const { tripId } = useParams<{ tripId: string }>()
+
+  const { formatTimer, handleStart, handlePause, isActive, isPaused, timer } = useTimer()
 
   const { startTrip, finalizeTrip, trip, error } = useTripState()
 
@@ -38,6 +41,7 @@ const IndividualTripMenu: React.FC = () => {
     }
   }, [trip?.tripState])
 
+  // console.log(formatTimer(timer))
 
 
   console.log(trip)
@@ -54,7 +58,6 @@ const IndividualTripMenu: React.FC = () => {
 
       <IonContent className="content" scrollY fullscreen>
         <div className="mapContainer">
-
         </div>
         <IonList>
           <IonItem >
@@ -95,7 +98,7 @@ const IndividualTripMenu: React.FC = () => {
           <IonFooter className="footer" >
             {
               trip?.tripId === tripId ? (
-                <IonButton expand="block" color={"danger"}>Reportar Incidencia</IonButton>
+                <IonButton expand="block" routerLink="/events" color={"danger"}>Reportar Incidencia</IonButton>
               ) : (
                 <IonButton expand="block" disabled color={"medium"}>Tienes un viaje en curso</IonButton>
               )

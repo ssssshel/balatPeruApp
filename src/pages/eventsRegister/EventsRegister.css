@@ -1,3 +1,15 @@
+.container {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+}
+
 .eventForm {
   width: 100%;
+  padding: 20px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
 }

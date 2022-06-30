@@ -1,5 +1,6 @@
-import { IonAlert, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonText } from "@ionic/react";
-import { useRef, useState } from "react";
+import { IonAlert, IonButton, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonText } from "@ionic/react";
+import { useEffect, useRef, useState } from "react";
+import { useTimer } from "../hooks/useTimer";
 
 interface PassengerProps {
   address: string
@@ -18,16 +19,31 @@ const PassengerItem: React.FC<PassengerProps> = ({ address, name, cellphone, ord
   }
 
   // maqueta
-  const [showStateAlert, setShowStateAlert] = useState(false)
+  const [showStateAlert1, setShowStateAlert1] = useState(false)
+  const [showStateAlert2, setShowStateAlert2] = useState(false)
+
+  const [formattedTimer, setFormattedTimer] = useState("")
+
+  const { formatTimer, handleStart, handlePause, isActive, isPaused, timer } = useTimer()
+  console.log(formatTimer(timer))
+
+  useEffect(() => {
+    const newTimer = formatTimer(timer)
+    setFormattedTimer(newTimer)
+  }, [timer])
+
 
   return (
     <IonItemSliding className="slider" ref={slideRef} onClick={() => handleOpenSlide()} >
       <IonItemOptions>
         <IonItemOption color={"success"}>Iniciar</IonItemOption>
         <IonItemOption color={"light"}>Llamar</IonItemOption>
-        <IonItemOption onClick={() => setShowStateAlert(true)} color={"primary"}>Estado</IonItemOption>
+        <IonItemOption onClick={() => setShowStateAlert1(true)} color={"primary"}>{formatTimer(timer)}</IonItemOption>
       </IonItemOptions>
-      <IonAlert isOpen={showStateAlert} onDidDismiss={() => setShowStateAlert(false)} header={"ALERT"} subHeader={"ddd"} message="Esta es una alerta" buttons={["ok"]} />
+      {/* alert1 (activa el alert2) */}
+      <IonAlert isOpen={showStateAlert1} onDidDismiss={() => setShowStateAlert1(false)} header={"Estado"} buttons={[{ text: "En punto de recojo", handler: () => { handleStart(); setShowStateAlert2(true) } }]} />
+      {/* alert2 (aqui se deberia mostrar el estado del timer) */}
+      <IonAlert isOpen={showStateAlert2} header={"Estado"} message={formatTimer(timer)} />
       <IonItem>
         <div className="leftItemSection">
           <p className="passengerAddress">{address}</p>
