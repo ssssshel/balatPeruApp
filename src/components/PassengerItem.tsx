@@ -38,7 +38,7 @@ const PassengerItem: React.FC<PassengerProps> = ({ address, name, cellphone, ord
       <IonItemOptions>
         <IonItemOption color={"success"}>Iniciar</IonItemOption>
         <IonItemOption color={"light"}>Llamar</IonItemOption>
-        <IonItemOption onClick={() => setShowStateAlert1(true)} color={"primary"}>{formatTimer(timer)}</IonItemOption>
+        <IonItemOption onClick={() => setShowStateAlert1(true)} color={"primary"}>Estado</IonItemOption>
       </IonItemOptions>
       {/* alert1 (activa el alert2) */}
       <IonAlert isOpen={showStateAlert1} onDidDismiss={() => setShowStateAlert1(false)} header={"Estado"} buttons={[{ text: "En punto de recojo", handler: () => { handleStart(); setShowStateAlert2(true) } }]} />

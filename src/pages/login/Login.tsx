@@ -27,7 +27,7 @@ const Login: React.FC = () => {
                 <IonInput type="password" placeholder="Contraseña" />
               </IonItem>
             </IonList>
-            <IonButton expand="block" routerLink="/" >Iniciar sesión</IonButton>
+            <IonButton expand="block" routerLink="/trips/pending" >Iniciar sesión</IonButton>
             <Link className="recover" to="/recover"><p>Olvidé mi contraseña</p></Link>
             <div className="bottomInfo">
               <p>

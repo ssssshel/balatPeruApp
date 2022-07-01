@@ -15,9 +15,6 @@ const IndividualPreviousTripMenu: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent scrollY fullscreen>
-        <div className="mapContainer">
-
-        </div>
         <IonList>
           <IonItem >
             <div className="leftItemSection">
@@ -26,8 +23,8 @@ const IndividualPreviousTripMenu: React.FC = () => {
               <p className="address">Dest: Calle Armendáriz 3465 - Comas</p>
             </div>
             <div className="rightItemSection">
-              <IonText color={"black"}><p className="state">Estado</p></IonText>
-              <IonText color={"primary"}><p className="type">Tipo de viaje</p></IonText>
+              <IonText color={"black"}><p className="state">Finalizado</p></IonText>
+              <IonText color={"primary"}><p className="type">Ida</p></IonText>
             </div>
           </IonItem>
 

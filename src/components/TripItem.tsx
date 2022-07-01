@@ -47,7 +47,7 @@ const TripItem: React.FC<TripItemProps> = ({ arePreviousTrips, tripId, type, dat
         setStateOfTrip("Sin iniciar")
         break;
     }
-  }, [trip?.tripState, trip?.tripId])
+  })
 
   const handleOpenSlide = () => {
     slideRef.current!.open("end")

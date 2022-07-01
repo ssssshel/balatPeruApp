@@ -1,8 +1,13 @@
 import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonItem, IonList, IonPage, IonSelect, IonSelectOption, IonText, IonTextarea, IonToolbar } from "@ionic/react"
 
+import { usePhotoTool } from "../../hooks/usePhotoTool"
+
 import './EventsRegister.css'
 
 const EventsRegister: React.FC = () => {
+
+  const { photos, deletePhoto, takePhoto } = usePhotoTool()
+
   return (
     <IonPage>
       <IonHeader>

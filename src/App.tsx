@@ -52,10 +52,10 @@ const App: React.FC = () => {
             <Login />
           </Route>
           <Route exact path="/">
-            {
+            {/* {
               user ? <Redirect to="/trips/pending" /> : <Redirect to="/login" />
-            }
-
+            } */}
+            <Redirect to="/login" />
           </Route>
           <Route exact path="/recover">
             <RecoverPassword />
