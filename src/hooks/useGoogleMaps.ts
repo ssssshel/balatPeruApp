@@ -1,8 +1,13 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { GoogleMap } from '@capacitor/google-maps'
+import { Geolocation } from '@capacitor/geolocation'
 
 
 export function useGoogleMaps() {
+
+  const [myLocation, setMyLocation] = useState<CurrentLocationCoordinates>()
+
+
   const mapRef = useRef<HTMLElement>();
   let newMap: GoogleMap;
 
@@ -20,10 +25,47 @@ export function useGoogleMaps() {
         },
         zoom: 8
       }
-    })
+    });
+
+    getCurrentLocation()
   }
 
-  return {
-    createMap, mapRef
+  const getCurrentLocation = async () => {
+
+    const coordinates = await Geolocation.getCurrentPosition({ enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }).then(async position => {
+      setMyLocation({ lat: position.coords.latitude, lng: position.coords.longitude })
+      await newMap.addMarker({
+        coordinate: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        },
+        title: 'Mi Ubicación'
+      })
+    }).catch(async e => await newMap.addMarker({
+      coordinate: {
+        lat: 33.6,
+        lng: -117.9
+      }
+    }))
+
+    // await newMap.addMarker({
+    //   coordinate: {
+    //     lat: 33.6,
+    //     lng: -117.9
+    //   }
+    // })
+
   }
+  return {
+    createMap, mapRef, getCurrentLocation
+  }
+}
+
+export function getCurrentLocationController() {
+
+}
+
+export interface CurrentLocationCoordinates {
+  lat: number,
+  lng: number
 }

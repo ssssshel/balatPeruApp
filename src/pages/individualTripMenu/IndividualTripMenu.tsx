@@ -5,7 +5,6 @@ import { useIonViewWillEnter } from '@ionic/react';
 
 import PassengerItem from "../../components/PassengerItem"
 import { useGoogleMaps } from "../../hooks/useGoogleMaps";
-import { useGeoLocation } from "../../hooks/useGeolocation";
 import { useTripState } from "../../hooks/useTripState"
 import { useTimer } from "../../hooks/useTimer"
 
@@ -46,14 +45,11 @@ const IndividualTripMenu: React.FC = () => {
     }
   }, [trip?.tripState])
 
-  console.log(formatTimer(timer))
-  console.log(trip)
+  // console.log(formatTimer(timer))
+  // console.log(trip)
 
-  const { createMap, mapRef } = useGoogleMaps();
-  const { getCurrentLocation } = useGeoLocation();
+  const { createMap, mapRef, getCurrentLocation } = useGoogleMaps();
 
-  getCurrentLocation()
-  // console.log(getCurrentLocation)
 
   useIonViewWillEnter(() => { createMap() })
 
@@ -77,6 +73,7 @@ const IndividualTripMenu: React.FC = () => {
         }}></capacitor-google-map>
 
         <IonList>
+          <IonButton onClick={() => { getCurrentLocation() }}>Ubicacion</IonButton>
           <IonItem >
             <div className="leftItemSection">
               <p className="date">Inicio: 23/06/22 | 07:30 AM</p>
