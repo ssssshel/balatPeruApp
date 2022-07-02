@@ -6,10 +6,39 @@
 
 .eventForm {
   width: 100%;
+  height: 100%;
   padding: 20px;
-}
-
-.item {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+}
+
+.inputList {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.description {
+  min-height: 15vh;
+}
+
+.imgcontainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 20vh;
+}
+
+.imgModalContainer {
+  height: 100%;
+  display: flex;
+  background-color: black;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btnRow {
+  width: 100%;
 }

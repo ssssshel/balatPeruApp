@@ -1,4 +1,4 @@
-import { IonAlert, IonButton, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonText } from "@ionic/react";
+import { IonAlert, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonText } from "@ionic/react";
 import { useEffect, useRef, useState } from "react";
 import { useTimer } from "../hooks/useTimer";
 

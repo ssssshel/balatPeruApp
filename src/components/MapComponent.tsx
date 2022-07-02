@@ -1,5 +1,5 @@
 import { GoogleMap } from '@capacitor/google-maps';
-import { useIonViewDidEnter } from '@ionic/react';
+import { useIonViewWillEnter } from '@ionic/react';
 import { useRef } from 'react';
 
 const MyMap: React.FC = () => {
@@ -23,18 +23,16 @@ const MyMap: React.FC = () => {
     })
   }
 
-  useIonViewDidEnter(() => { createMap() })
+  useIonViewWillEnter(() => { createMap() })
 
   return (
-    <div className="component-wrapper">
-      <capacitor-google-map ref={mapRef} style={{
-        display: 'inline-block',
-        width: 100 + '%',
-        height: 60 + 'vh'
-      }}></capacitor-google-map>
 
-      {/* <button onClick={createMap}>Create Map</button> */}
-    </div>
+    <capacitor-google-map ref={mapRef} style={{
+      display: 'inline-block',
+      width: 100 + '%',
+      height: 60 + 'vh'
+    }}></capacitor-google-map>
+
   )
 }
 

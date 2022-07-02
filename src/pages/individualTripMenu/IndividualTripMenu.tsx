@@ -1,7 +1,8 @@
 import { IonBackButton, IonButton, IonButtons, IonContent, IonFooter, IonHeader, IonItem, IonList, IonPage, IonText, IonToolbar, useIonViewDidEnter } from "@ionic/react"
 import { useEffect, useState, useRef } from "react"
 import { useParams } from "react-router"
-
+import { GoogleMap } from '@capacitor/google-maps';
+import { useIonViewWillEnter } from '@ionic/react';
 
 import PassengerItem from "../../components/PassengerItem"
 import { useTripState } from "../../hooks/useTripState"
@@ -48,33 +49,29 @@ const IndividualTripMenu: React.FC = () => {
 
   // console.log(formatTimer(timer))
 
-  // const { createMap, mapRef } = useGoogleMaps()
-
-  // useIonViewDidEnter(() => {
-  //   createMap()
-  // })
-
-  // ------------------------
-
   // const mapRef = useRef<HTMLElement>();
   // let newMap: GoogleMap;
+  let newMap
+  const mapRef = useRef(null)
 
-  // async function createMap() {
-  //   if (!mapRef.current) return;
+  async function createMap() {
+    if (!mapRef.current) return;
 
-  //   newMap = await GoogleMap.create({
-  //     id: 'my-cool-map',
-  //     element: mapRef.current,
-  //     apiKey: "AIzaSyCqgfoQIQg7IXBq-xAa4o0tpQbDAVuMrsA",
-  //     config: {
-  //       center: {
-  //         lat: 33.6,
-  //         lng: -117.9
-  //       },
-  //       zoom: 8
-  //     }
-  //   })
-  // }
+    newMap = await GoogleMap.create({
+      id: 'map',
+      element: mapRef.current,
+      apiKey: "AIzaSyCqgfoQIQg7IXBq-xAa4o0tpQbDAVuMrsA",
+      config: {
+        center: {
+          lat: 33.6,
+          lng: -117.9
+        },
+        zoom: 8
+      }
+    })
+  }
+
+  useIonViewWillEnter(() => { createMap() })
 
   console.log(trip)
   return (
@@ -89,17 +86,14 @@ const IndividualTripMenu: React.FC = () => {
       </IonHeader>
 
       <IonContent className="content" scrollY fullscreen>
-        {/* <div className="mapContainer"> */}
-
-        {/* -------------------- */}
-        {/* <capacitor-google-map ref={mapRef} className="mapContainer" >
-
-        </capacitor-google-map> */}
-        {/* </div> */}
-        {/* <IonButton onClick={() => createMap()}>Crear Mapa</IonButton> */}
+        <capacitor-google-map ref={mapRef} style={{
+          display: 'inline-block',
+          width: 100 + '%',
+          height: 60 + 'vh',
+        }}></capacitor-google-map>
 
         {/* ------------------------- */}
-        <MyMap></MyMap>
+        {/* <MyMap></MyMap> */}
         <IonList>
           <IonItem >
             <div className="leftItemSection">

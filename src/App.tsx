@@ -42,7 +42,7 @@ const App: React.FC = () => {
 
   return (
 
-    <IonApp>
+    <IonApp className='app' >
       <IonReactRouter>
         <DrawerMenu />
         <IonRouterOutlet id='main'>
