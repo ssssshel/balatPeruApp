@@ -1,17 +1,16 @@
 import { IonBackButton, IonButton, IonButtons, IonContent, IonFooter, IonHeader, IonItem, IonList, IonPage, IonText, IonToolbar, useIonViewDidEnter } from "@ionic/react"
 import { useEffect, useState, useRef } from "react"
 import { useParams } from "react-router"
-import { GoogleMap } from '@capacitor/google-maps';
 import { useIonViewWillEnter } from '@ionic/react';
 
 import PassengerItem from "../../components/PassengerItem"
+import { useGoogleMaps } from "../../hooks/useGoogleMaps";
+import { useGeoLocation } from "../../hooks/useGeolocation";
 import { useTripState } from "../../hooks/useTripState"
 import { useTimer } from "../../hooks/useTimer"
-// import { useGoogleMaps } from "../../hooks/useGoogleMaps"
 
 import './IndividualTripMenu.css'
-// import { GoogleMap } from "@capacitor/google-maps"
-import MyMap from "../../components/MapComponent"
+
 
 const IndividualTripMenu: React.FC = () => {
 
@@ -47,33 +46,17 @@ const IndividualTripMenu: React.FC = () => {
     }
   }, [trip?.tripState])
 
-  // console.log(formatTimer(timer))
+  console.log(formatTimer(timer))
+  console.log(trip)
 
-  // const mapRef = useRef<HTMLElement>();
-  // let newMap: GoogleMap;
-  let newMap
-  const mapRef = useRef(null)
+  const { createMap, mapRef } = useGoogleMaps();
+  const { getCurrentLocation } = useGeoLocation();
 
-  async function createMap() {
-    if (!mapRef.current) return;
-
-    newMap = await GoogleMap.create({
-      id: 'map',
-      element: mapRef.current,
-      apiKey: "AIzaSyCqgfoQIQg7IXBq-xAa4o0tpQbDAVuMrsA",
-      config: {
-        center: {
-          lat: 33.6,
-          lng: -117.9
-        },
-        zoom: 8
-      }
-    })
-  }
+  getCurrentLocation()
+  // console.log(getCurrentLocation)
 
   useIonViewWillEnter(() => { createMap() })
 
-  console.log(trip)
   return (
     <IonPage>
       <IonHeader>
@@ -86,14 +69,13 @@ const IndividualTripMenu: React.FC = () => {
       </IonHeader>
 
       <IonContent className="content" scrollY fullscreen>
+
         <capacitor-google-map ref={mapRef} style={{
           display: 'inline-block',
           width: 100 + '%',
           height: 60 + 'vh',
         }}></capacitor-google-map>
 
-        {/* ------------------------- */}
-        {/* <MyMap></MyMap> */}
         <IonList>
           <IonItem >
             <div className="leftItemSection">
