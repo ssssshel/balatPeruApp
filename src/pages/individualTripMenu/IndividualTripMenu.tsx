@@ -48,10 +48,11 @@ const IndividualTripMenu: React.FC = () => {
   // console.log(formatTimer(timer))
   // console.log(trip)
 
-  const { createMap, mapRef, getCurrentLocation } = useGoogleMaps();
-
+  const { createMap, mapRef, getCurrentLocation, isLoading, errorMap } = useGoogleMaps();
 
   useIonViewWillEnter(() => { createMap() })
+
+  console.log(errorMap)
 
   return (
     <IonPage>
@@ -65,12 +66,16 @@ const IndividualTripMenu: React.FC = () => {
       </IonHeader>
 
       <IonContent className="content" scrollY fullscreen>
+        {
+          errorMap === true ? (<div className="mapContainer"><p className="errMessage">Debe activar la ubicación para continuar </p></div>) : (
+            <capacitor-google-map ref={mapRef} style={{
+              display: 'inline-block',
+              width: 100 + '%',
+              height: 60 + 'vh',
+            }}></capacitor-google-map>
 
-        <capacitor-google-map ref={mapRef} style={{
-          display: 'inline-block',
-          width: 100 + '%',
-          height: 60 + 'vh',
-        }}></capacitor-google-map>
+          )
+        }
 
         <IonList>
           <IonButton onClick={() => { getCurrentLocation() }}>Ubicacion</IonButton>

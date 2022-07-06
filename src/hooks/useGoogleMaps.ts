@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { GoogleMap } from '@capacitor/google-maps'
 import { Geolocation } from '@capacitor/geolocation'
 
@@ -6,7 +6,8 @@ import { Geolocation } from '@capacitor/geolocation'
 export function useGoogleMaps() {
 
   const [myLocation, setMyLocation] = useState<CurrentLocationCoordinates>()
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMap, setErrorMap] = useState<boolean | null>(null);
 
   const mapRef = useRef<HTMLElement>();
   let newMap: GoogleMap;
@@ -32,32 +33,37 @@ export function useGoogleMaps() {
 
   const getCurrentLocation = async () => {
 
+    setIsLoading(true)
     const coordinates = await Geolocation.getCurrentPosition({ enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }).then(async position => {
-      setMyLocation({ lat: position.coords.latitude, lng: position.coords.longitude })
+      // const { latitude, longitude } = position.coords;
+      // if (myLocation?.lat !== position.coords.latitude || myLocation?.lng !== position.coords.longitude) {
+      //   newMap.removeMarker()
+      // }
       await newMap.addMarker({
         coordinate: {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         },
-        title: 'Mi Ubicación'
-      })
-    }).catch(async e => await newMap.addMarker({
-      coordinate: {
-        lat: 33.6,
-        lng: -117.9
-      }
-    }))
+        title: 'Mi Ubicación',
+      }).then(() =>
+        newMap.setCamera({
+          coordinate: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          },
+          zoom: 18
+        })
+      )
+      setMyLocation({ lat: position.coords.latitude, lng: position.coords.longitude })
+      setIsLoading(false)
+    }).catch(error => { setErrorMap(true); setIsLoading(false) })
 
-    // await newMap.addMarker({
-    //   coordinate: {
-    //     lat: 33.6,
-    //     lng: -117.9
-    //   }
-    // })
+    return coordinates
 
   }
+
   return {
-    createMap, mapRef, getCurrentLocation
+    createMap, mapRef, getCurrentLocation, isLoading, errorMap
   }
 }
 

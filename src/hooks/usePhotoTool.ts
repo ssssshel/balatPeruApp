@@ -7,11 +7,12 @@ import { Capacitor } from "@capacitor/core";
 import { isPlatform } from "@ionic/react";
 
 const PHOTO_STORAGE = "photos";
+const B64_PHOTO_STORAGE = "b64photos";
 
 export function usePhotoTool() {
 
   const [photos, setPhotos] = useState<UserPhoto[]>([]);
-
+  // console.log(photos)
 
   // -----------------------web-------------------------------
 
@@ -51,22 +52,19 @@ export function usePhotoTool() {
     const newPhotos = [savedFileImage, ...photos];
     setPhotos(newPhotos);
 
-    Storage.set({ key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) })
+    // Storage.set({ key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) })
   }
 
   const savePicture = async (photo: Photo, fileName: string): Promise<UserPhoto> => {
     let base64Data: string
 
-    // const file = await Filesystem.readFile({
-    //   path: photo.path!
-    // })
-    // base64Data = file.data
-
     if (isPlatform('hybrid')) {
       const file = await Filesystem.readFile({ path: photo.path! })
       base64Data = file.data
+
     } else {
       base64Data = await base64FromPath(photo.webPath!)
+
     }
 
     const savedFile = await Filesystem.writeFile({
@@ -75,29 +73,27 @@ export function usePhotoTool() {
       directory: Directory.Data
     })
 
-    // return {
-    //   filepath: savedFile.uri,
-    //   webviewPath: Capacitor.convertFileSrc(savedFile.uri)
-    // }
     if (isPlatform('hybrid')) {
       // Display the new image by rewriting the 'file://' path to HTTP
       return {
         filepath: savedFile.uri,
-        webviewPath: Capacitor.convertFileSrc(savedFile.uri)
+        webviewPath: Capacitor.convertFileSrc(savedFile.uri),
+        b64Data: base64Data
       }
     } else {
       return {
         filepath: fileName,
-        webviewPath: photo.webPath
+        webviewPath: photo.webPath,
+        b64Data: base64Data
       }
     }
   }
 
-  const deletePhoto = async (photo: UserPhoto) => {
+  const deletePhoto = async (photo: UserPhoto,) => {
 
     const newPhotos = photos.filter(p => p.filepath !== photo.filepath)
 
-    Storage.set({ key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) })
+    // Storage.set({ key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) })
 
     const fileName = photo.filepath.substring(photo.filepath.lastIndexOf('/') + 1);
     await Filesystem.deleteFile({ path: fileName, directory: Directory.Data })
@@ -132,4 +128,5 @@ export async function base64FromPath(path: string): Promise<string> {
 export interface UserPhoto {
   filepath: string;
   webviewPath?: string;
+  b64Data?: string;
 }

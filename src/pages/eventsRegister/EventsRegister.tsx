@@ -1,6 +1,7 @@
-import { IonActionSheet, IonAlert, IonBackButton, IonButton, IonButtons, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonModal, IonPage, IonRow, IonSelect, IonSelectOption, IonText, IonTextarea, IonTitle, IonToolbar } from "@ionic/react"
+import { IonActionSheet, IonBackButton, IonButton, IonButtons, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonModal, IonPage, IonRow, IonSelect, IonSelectOption, IonTextarea, IonToolbar } from "@ionic/react"
 import { eye, trash, close, camera } from 'ionicons/icons'
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { Controller, useForm } from "react-hook-form"
 
 import { usePhotoTool, UserPhoto } from "../../hooks/usePhotoTool"
 
@@ -9,12 +10,33 @@ import './EventsRegister.css'
 const EventsRegister: React.FC = () => {
 
   const modalRef = useRef<HTMLIonModalElement>(null)
-  const pageRef = useRef(null)
 
   const [selectedPhoto, setSelectedPhoto] = useState<UserPhoto>()
   const [showSelectedPhoto, setShowSelectedPhoto] = useState(false)
-  // const [selectedPhotoPath, setSelectedPhotoPath] = useState<string | undefined>(undefined)
   const { photos, deletePhoto, takePhoto } = usePhotoTool()
+
+
+  const { control, handleSubmit, setValue, register, getValues, formState: { errors } } = useForm({
+    defaultValues: {
+      type: "",
+      description: "",
+      images: Array<string | undefined>(),
+    }
+  })
+
+
+  useEffect(() => {
+    const bse64Info = photos.map((photo) => photo.b64Data)
+
+    setValue('images', bse64Info)
+
+  }, [photos.length])
+
+
+  const onSubmit = (data: any) => {
+    alert(JSON.stringify(data, null, 2));
+  };
+
 
   return (
     <IonPage>
@@ -28,19 +50,32 @@ const EventsRegister: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="container" fullscreen>
-        <form className="eventForm">
+        <form className="eventForm" onSubmit={handleSubmit(onSubmit)}>
           <IonList className="inputList" lines="none">
+
+            {/* ======= TIPO DE INCIDENCIA ====== */}
             <IonItem>
               <IonLabel position="floating">Tipo de incidencia</IonLabel>
-              <IonSelect placeholder="Seleccione un tipo">
-                <IonSelectOption value="1">Observación</IonSelectOption>
-                <IonSelectOption value="2">Emergencia</IonSelectOption>
-              </IonSelect>
+              <Controller
+
+
+                render={({ field }) => (
+                  <IonSelect placeholder="Seleccione un tipo" value={field.value} onIonChange={e => setValue('type', e.detail.value)} >
+                    <IonSelectOption value="OBSERVACION">Observación</IonSelectOption>
+                    <IonSelectOption value="EMERGENCIA">Emergencia</IonSelectOption>
+                  </IonSelect>
+
+                )} control={control} name="type" rules={{ required: 'Selecciona un tipo de incidencia' }} />
             </IonItem>
+
+            {/* ======= DESCRIPCION ====== */}
             <IonItem  >
               <IonLabel position="floating">Descripción</IonLabel>
-              <IonTextarea className="description" placeholder="Breve descripción" />
+              <IonTextarea className="description" maxlength={120} minlength={10} placeholder="Breve descripción" {...register('description', { required: "Ingresa una descripción" })} />
             </IonItem>
+
+
+            {/* ======= IMAGENES ====== */}
             <IonItem className="imgcontainer">
               {/* <IonLabel>Agrega Imágenes</IonLabel> */}
               <IonGrid>
@@ -80,6 +115,7 @@ const EventsRegister: React.FC = () => {
                 </IonRow>
               </IonGrid>
             </IonItem>
+
           </IonList>
           <IonGrid className="btnRow">
             <IonRow>
@@ -87,7 +123,7 @@ const EventsRegister: React.FC = () => {
                 <IonButton onClick={() => takePhoto()} className="btnRegister" expand="block" color={"primary"} ><IonIcon icon={camera} />Tomar foto</IonButton>
               </IonCol>
               <IonCol>
-                <IonButton className="btnRegister" expand="block" color={"danger"}>Registrar</IonButton>
+                <IonButton className="btnRegister" expand="block" color={"danger"} type="submit" >Registrar</IonButton>
               </IonCol>
             </IonRow>
           </IonGrid>
