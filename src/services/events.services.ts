@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-export function EventsService() {
+export function EventsServices() {
 
   const [isLoading, setIsLoading] = useState(false)
   const [success, setSuccess] = useState<boolean | null>(null)
