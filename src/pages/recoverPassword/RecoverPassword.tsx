@@ -1,7 +1,19 @@
 import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonPage, IonToolbar } from "@ionic/react"
 import { person } from 'ionicons/icons'
+import { useForm } from "react-hook-form"
 
 const RecoverPassword: React.FC = () => {
+
+  const { handleSubmit, register, formState: { errors } } = useForm({
+    defaultValues: {
+      username: "",
+    }
+  })
+
+  function onSubmit(data: any) {
+    alert(JSON.stringify(data, null, 2));
+  }
+
   return (
     <IonPage>
       <IonHeader>
@@ -9,18 +21,19 @@ const RecoverPassword: React.FC = () => {
           <IonButtons slot="start">
             <IonBackButton defaultHref="/login" />
           </IonButtons>
-          {/* <IonTitle>Recuperar contraseña</IonTitle> */}
           <p>Recuperar contraseña</p>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <div className="container">
           <p className="balat">BalatPerú</p>
-          <form className="form">
+          <form className="form" onSubmit={handleSubmit(onSubmit)}>
+
+            {/* USERNAME */}
             <IonItem>
               <IonIcon icon={person} />
               <div className="spacer" />
-              <IonInput type="text" placeholder="Usuario" />
+              <IonInput type="text" placeholder="Usuario" minlength={8} {...register('username', { required: "Ingrese un nombre de usuario" })} />
             </IonItem>
             <IonButton expand="block" type="submit">Enviar</IonButton>
           </form>
